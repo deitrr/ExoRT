@@ -13,6 +13,8 @@ public
   !character(len=256), parameter :: exort_rootdir = '/suppscr/vsm/gscratch/wolfet/ExoRT/'  
 
   ! Machine: discover
-  character(len=256), parameter :: exort_rootdir = '/discover/nobackup/etwolf/models/ExoRT/'  
+  !character(len=256), parameter :: exort_rootdir = '/discover/nobackup/etwolf/models/ExoRT/'  
+
+  character(len=256), parameter :: exort_rootdir = '/home/deitrr/ExoRT/'
 
 end module sys_rootdir

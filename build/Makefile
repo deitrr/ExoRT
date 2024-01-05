@@ -9,7 +9,13 @@
 #LIB_NETCDF := /projects/btoon/Libraries/netcdf-3.6.2-ifort12.0/lib       
 
 # netcdf directory for discover
-LIB_NETCDF := /gpfsm/dulocal/sles11/other/netcdf/3.6.2_intel-14.0.3.174/lib
+#LIB_NETCDF := /gpfsm/dulocal/sles11/other/netcdf/3.6.2_intel-14.0.3.174/lib
+
+
+#LIB_NETCDF := /cvmfs/soft.computecanada.ca/easybuild/software/2017/avx2/MPI/intel2016.4/openmpi2.1/netcdf-mpi/4.1.3/lib
+#LIB_NETCDF := /cvmfs/soft.computecanada.ca/easybuild/software/2017/avx2/MPI/intel2016.4/openmpi2.1/netcdf-fortran-mpi/4.4.4/lib
+#LIB_NETCDF := /cvmfs/soft.computecanada.ca/easybuild/software/2017/avx2/Compiler/intel2016.4/netcdf-fortran/4.4.4/lib
+LIB_NETCDF := /home/deitrr/netcdf3/lib
 
 #endif
 
@@ -64,7 +70,7 @@ H2ON35_BLD = bld.h2on35
 OBJDIR = obj
 
 ifeq ($(USER_FC),$(null))
-  FC := ifort
+  FC := gfortran
 else
   FC := $(USER_FC)
 endif
