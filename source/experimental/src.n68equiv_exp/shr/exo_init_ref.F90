@@ -31,25 +31,25 @@ module exo_init_ref
   !  wavelength group                                               
 
   ! full spectral range
-  integer, parameter  :: lw_iwbeg = 1     ! thermal band wvl integration limits                  
-  integer, parameter  :: lw_iwend = ntot_wavlnrng
-  integer, parameter  :: sw_iwbeg = 1     ! solar band wvl integration limits                    
-  integer, parameter  :: sw_iwend = ntot_wavlnrng
-  integer, parameter  :: lw_ipbeg = 1     ! thermal band gpt integration limits                  
-  integer, parameter  :: lw_ipend = ntot_gpt
-  integer, parameter  :: sw_ipbeg = 1     ! solar band gpt integration limits                    
-  integer, parameter  :: sw_ipend = ntot_gpt
+  !integer, parameter  :: lw_iwbeg = 1     ! thermal band wvl integration limits                  
+  !integer, parameter  :: lw_iwend = ntot_wavlnrng
+  !integer, parameter  :: sw_iwbeg = 1     ! solar band wvl integration limits                    
+  !integer, parameter  :: sw_iwend = ntot_wavlnrng
+  !integer, parameter  :: lw_ipbeg = 1     ! thermal band gpt integration limits                  
+  !integer, parameter  :: lw_ipend = ntot_gpt
+  !integer, parameter  :: sw_ipbeg = 1     ! solar band gpt integration limits                    
+  !integer, parameter  :: sw_ipend = ntot_gpt
 
   ! reduced integration limits for 3dmodel efficiency
   ! modifiable to suit stellar spectra and planet emission temperatures
-  !integer, parameter  :: lw_iwbeg = 1     ! thermal band wvl integration limits                  
-  !integer, parameter  :: lw_iwend = 35 
-  !integer, parameter  :: sw_iwbeg = 16    ! solar band wvl integration limits                    
-  !integer, parameter  :: sw_iwend = 68
-  !integer, parameter  :: lw_ipbeg = 1     ! thermal band gpt integration limits                  
-  !integer, parameter  :: lw_ipend = 280
-  !integer, parameter  :: sw_ipbeg = 121   ! solar band gpt integration limits                    
-  !integer, parameter  :: sw_ipend = 544
+  integer, parameter  :: lw_iwbeg = 1     ! thermal band wvl integration limits                  
+  integer, parameter  :: lw_iwend = 35 
+  integer, parameter  :: sw_iwbeg = 16    ! solar band wvl integration limits                    
+  integer, parameter  :: sw_iwend = 68
+  integer, parameter  :: lw_ipbeg = 1     ! thermal band gpt integration limits                  
+  integer, parameter  :: lw_ipend = 280
+  integer, parameter  :: sw_ipbeg = 121   ! solar band gpt integration limits                    
+  integer, parameter  :: sw_ipend = 544
 
   !                                                                              
   ! set two-stream model coefficients                                            
@@ -380,7 +380,7 @@ integer :: ip
    !=====  interval 51:   =====!
    k51_major_data(iH2O,:,:,:) = k51_h2o(:,:,:) 
    k51_major_data(iCO2,:,:,:) = k51_co2(:,:,:)
-   k51_major_data(iCH4,:,:,:) = k52_ch4(:,:,:)
+   k51_major_data(iCH4,:,:,:) = k51_ch4(:,:,:)
    !=====  interval 52:   =====!
    k52_major_data(iH2O,:,:,:) = k52_h2o(:,:,:) 
    k52_major_data(iCO2,:,:,:) = k52_co2(:,:,:)
@@ -680,7 +680,7 @@ integer :: ip
      iq = iq + 1
      k25_grey_data(iH2O,:,:) = k25_grey_data(iH2O,:,:) + k25_h2o(ig,:,:) * g_weight(iq)
      k25_grey_data(iCO2,:,:) = k25_grey_data(iCO2,:,:) + k25_co2(ig,:,:) * g_weight(iq)
-     k25_grey_data(iCH4,:,:) = k05_grey_data(iCH4,:,:) + k25_ch4(ig,:,:) * g_weight(iq)
+     k25_grey_data(iCH4,:,:) = k25_grey_data(iCH4,:,:) + k25_ch4(ig,:,:) * g_weight(iq)
    enddo
    !=====  interval 26:   =====!
    k26_grey_data(:,:,:) = 0.0

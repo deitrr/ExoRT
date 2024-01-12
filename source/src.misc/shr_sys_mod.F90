@@ -35,7 +35,7 @@ SUBROUTINE shr_sys_system(str,rcode)
    !----- functions -----
    integer(SHR_KIND_IN),external    :: ishell ! function to envoke shell command
 #endif
-#if (defined OSF1 || defined SUNOS || (defined LINUX && !defined G95))
+#if (defined OSF1 || defined SUNOS || ((defined LINUX || defined __linux__) && !defined G95))
    !----- functions -----
    integer(SHR_KIND_IN),external    :: system ! function to envoke shell command
 #endif
@@ -57,11 +57,11 @@ SUBROUTINE shr_sys_system(str,rcode)
    call system(str,rcode)
 #endif
 
-#if (defined OSF1 || defined SUNOS || defined LINUX)
+#if (defined OSF1 || defined SUNOS || defined LINUX || defined __linux__)
    rcode = system(str)
 #endif
 
-#if (!defined CRAY && !defined IRIX64 && !defined AIX && !defined OSF1 && !defined SUNOS && !defined LINUX && !defined NEC_SX && !defined UNICOSMP)
+#if (!defined CRAY && !defined IRIX64 && !defined AIX && !defined OSF1 && !defined SUNOS && !defined LINUX && !defined NEC_SX && !defined UNICOSMP && !defined __linux__)
    write(*,*) '(shr_sys_system) ERROR: no implementation for this architecture'
    call shr_sys_abort('no system routine on this machine')
 #endif

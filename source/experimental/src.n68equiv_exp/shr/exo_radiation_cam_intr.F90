@@ -138,7 +138,6 @@ contains
 
     ! Get physics buffer indices
     cld_idx    = pbuf_get_index('CLD')
-    !concld_idx = pbuf_get_index('CONCLD')
 
     if (rk_clouds) then
       cicewp_idx = pbuf_get_index('CICEWP')
@@ -150,17 +149,15 @@ contains
       cliqwp_idx = pbuf_get_index('ICLWP')
     endif
 
-    !cldemis_idx= pbuf_get_index('CLDEMIS')
-    !cldtau_idx = pbuf_get_index('CLDTAU')
     rel_idx = pbuf_get_index('REL')
     rei_idx = pbuf_get_index('REI')
     qrs_idx = pbuf_get_index('QRS')
     qrl_idx = pbuf_get_index('QRL')  
 
-    if (do_exo_condense_co2) then 
+    !if (do_exo_condense_co2) then 
       rei_co2_idx    = pbuf_get_index('REI_CO2')
       cicewp_co2_idx = pbuf_get_index('CICEWP_CO2')
-    endif
+    !endif
   
     ! Add Shortwave radiation fields
     call addfld ('SOLIN   ','W/m2    ',1,    'A','Solar insolation',phys_decomp, sampling_seq='rad_lwsw')
@@ -459,10 +456,10 @@ contains
     call pbuf_get_field(pbuf, rei_idx, rei)
     call pbuf_get_field(pbuf, cicewp_idx, cicewp)
     call pbuf_get_field(pbuf, cliqwp_idx, cliqwp)
-    if (do_exo_condense_co2) then 
+!    if (do_exo_condense_co2) then 
       call pbuf_get_field(pbuf, rei_co2_idx, rei_co2)
       call pbuf_get_field(pbuf, cicewp_co2_idx, cicewp_co2)
-    endif
+!    endif
 
     ! CAM5 cloud option
     call phys_getopts(microp_scheme_out=microp_pgk)

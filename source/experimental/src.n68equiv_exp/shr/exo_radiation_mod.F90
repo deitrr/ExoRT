@@ -556,8 +556,8 @@ contains
         endif
       else
         horizon_extension = .FALSE.
-      endif
-    endif
+      endif 
+   endif
 
     ! Only do shortwave calculation if sun is sufficiently above horizon;
     !  set probability point interval indices for use in radiative transfer
@@ -614,6 +614,12 @@ contains
         endif
       endif
 
+!      ! On exceedingly rare occurences, zenith angles at the far horizon (89.9<z<90 deg)
+!      ! will be injested from the orbital calculations and can cause numerical faults.        
+!      if (cos_mu < 1.0e-3) then
+!        write(*,*) "cos_mu violation", cos_mu 
+!        cos_mu = max(cos_mu, 1.0e-3)        ! Trim far horizon zenith angles to ~89.9 deg
+!       endif
     else     ! (cos_mu < 1.d-6) 
       sw_on = .FALSE.       ! Sun below horizon, do only longwave
     endif
@@ -631,7 +637,7 @@ contains
                          cFRC_mcica, cICE_mcica, cICE_mcica ) 
 
     ! call co2 cloud optical depth
-    if (do_exo_condense_co2 .and. do_exo_co2cloud_rad) call calc_cldopd_co2(cICE_co2, REI_CO2, tau_cld_co2, singscat_cld_co2, asym_cld_co2)
+    if(do_exo_condense_co2 .and. do_exo_rt_co2cld) call calc_cldopd_co2(cICE_co2, REI_CO2, tau_cld_co2, singscat_cld_co2, asym_cld_co2)
 
     call rad_precalc(pmid/100.0, tmid, tint, swcut, tau_gas, tau_ray, &
                      tau_cld_gray, singscat_cld_gray, asym_cld_gray, &
@@ -880,12 +886,10 @@ contains
  !           endif
           enddo
 
-          if (do_exo_condense_co2) then 
-            ! Add CO2 ice cloud optical depths
-            taul_ig = taul_ig + tau_cld_co2(iw,k)
-            w0_ig = w0_ig + singscat_cld_co2(iw,k) * tau_cld_co2(iw,k)
-            g0_ig = g0_ig + asym_cld_co2(iw,k) * singscat_cld_co2(iw,k) * tau_cld_co2(iw,k)
-          endif         
+          ! Add CO2 ice cloud optical depths
+          taul_ig = taul_ig + tau_cld_co2(iw,k)
+          w0_ig = w0_ig + singscat_cld_co2(iw,k) * tau_cld_co2(iw,k)
+          g0_ig = g0_ig + asym_cld_co2(iw,k) * singscat_cld_co2(iw,k) * tau_cld_co2(iw,k)
 
           ! Add aerosol optical depths here
           ! place holder
@@ -1422,6 +1426,7 @@ contains
     integer :: ip
     integer :: k_1
     integer :: kd
+    real(r8) :: cos_mu1           
 
 !------------------------------------------------------------------------
 !
@@ -1913,7 +1918,7 @@ contains
                            CK2(ip,k)*EM1(ip,k)+CPB(ip,k)
             sw_dnflux(k) = sw_dnflux(k)+CK1(ip,k)*EL2(ip,k)+  &
                            CK2(ip,k)*EM2(ip,k)+CMB(ip,k)+DIRECT(ip,k)
-
+            
             ! spectral fluxes
             sw_upflux_spec(k,iw) = sw_upflux_spec(k,iw)+CK1(ip,k)*EL1(ip,k)+  &
                                    CK2(ip,k)*EM1(ip,k)+CPB(ip,k)
