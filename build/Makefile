@@ -9,7 +9,7 @@
 
 # use "-lnetcdf" for NETCDF3
 # use "-lnetcdf -lnetcdff" for NETCDF4
-ARGS := -lnetcdf -lnetcdff
+ARGS := -lnetcdf -lnetcdff -g
 
 LIB_NETCDF := /cvmfs/soft.computecanada.ca/easybuild/software/2017/avx2/MPI/intel2016.4/openmpi2.1/netcdf-mpi/4.1.3/lib
 #LIB_NETCDF := /cvmfs/soft.computecanada.ca/easybuild/software/2017/avx2/MPI/intel2016.4/openmpi2.1/netcdf-fortran-mpi/4.4.4/lib

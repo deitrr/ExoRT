@@ -40,8 +40,8 @@ module exoplanet_mod
   !integer, parameter :: exo_pver   = 45  !CESM   
   !integer, parameter :: exo_pver   = 66  !WACCM
   !integer, parameter :: exo_pver   = 49  !US1976
-  !integer, parameter :: exo_pver   = 69   !2 bar CO2   
-  integer, parameter :: exo_pver   = 300 !ExoMIP
+  integer, parameter :: exo_pver   = 69   !2 bar CO2   
+!  integer, parameter :: exo_pver   = 300 !ExoMIP
 
   ! must set gravity!!!!
   real(r8), parameter :: exo_g = 9.80616 !Earth
